@@ -33,7 +33,7 @@ app.listen(PORT);
 
 app.post('/api/submit', async (req, res) => {
   const data = req.body;
-  const { url, shortcode: shortCode } = data;
+  const { url, shortCode } = data;
   if (!url) {
     return res.status(400).send({ error: "URL required" });
   }
@@ -55,7 +55,7 @@ app.post('/api/submit', async (req, res) => {
 });
 
 app.get('/api/:shortcode', async (req, res) => {
-  const { shortcode: shortCode } = req.params;
+  const { shortCode } = req.params;
   const instance = await Shortner.findOne({ shortCode })
   if (!instance) {
     return res.status(404).send({ error: "Invalid shortcode" });
@@ -67,7 +67,7 @@ app.get('/api/:shortcode', async (req, res) => {
 });
 
 app.get('/api/:shortcode/stats', async (req, res) => {
-  const { shortcode: shortCode } = req.params;
+  const { shortCode } = req.params;
   const instance = await Shortner.findOne({ shortCode })
   if (!instance) {
     return res.status(404).send({ error: "Invalid shortcode" });
